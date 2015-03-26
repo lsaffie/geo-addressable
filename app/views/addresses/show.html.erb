@@ -4,6 +4,21 @@
   <strong>Address:</strong>
   <%= @address.address %>
 </p>
+<p>
+  <strong>Latitude:</strong>
+  <%= @address.latitude%>
+</p>
+<p>
+  <strong>Longitude:</strong>
+  <%= @address.longitude%>
+</p>
+
+<% @address.nearbys(15, units: :km).each do |near| %>
+  <%= near.address %>
+<% end %>
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@address.latitude}%2C#{@address.longitude}" %>
+
 
 <%= link_to 'Edit', edit_address_path(@address) %> |
 <%= link_to 'Back', addresses_path %>
