@@ -1,0 +1,34 @@
+%p
+  = notice 
+
+%p
+  = notice 
+  %strong
+    Address:
+  = @address.address
+
+%p
+  = notice 
+  %strong
+    Latitude:
+  =@address.latitude
+
+%p
+  = notice 
+  %strong
+    Longitude:
+  = @address.longitude
+
+
+
+
+%p
+  = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@address.latitude}%2C#{@address.longitude}"
+
+%p
+  %b
+    Nearby Addresses
+  %table
+    -@address.nearbys(15, units: :km).each do |near|
+      %tr
+        %td=link_to near.address, address_path(near)

@@ -44,4 +44,6 @@ group :development, :test do
 end
 
 gem 'geocoder'
+gem 'haml'
 
+gem 'bootstrap-sass'
