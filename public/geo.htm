@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+  </head>
+  <body onLoad="getLocation()">
+    <div class="container">
+
+      <p>
+      <div id="current-position"> </div>
+      </p>
+
+      <p>
+      Address: <span id="current-address"> </span>
+      </p>
+      <p>
+      Neighbourhood1: <span id="current-neighbourhood1"> </span>
+      </p>
+      <p>
+      Neighbourhood2:
+      <span id="current-neighbourhood2"> </span>
+      </p>
+      <p>
+      Neighbourhood3:
+      <span id="current-neighbourhood3"> </span>
+      </p>
+      <p>
+      Neighbourhood4:
+      <span id="current-neighbourhood4"> </span>
+      </p>
+
+      <p>
+      <div id="map-canvas"> </div>
+      </p>
+      </container>
+
+
+      <script>
+        var latlong=document.getElementById("current-position");
+        var address=document.getElementById("current-address");
+        var neighbourhood1=document.getElementById("current-neighbourhood1");
+        var neighbourhood2=document.getElementById("current-neighbourhood2");
+        var neighbourhood3=document.getElementById("current-neighbourhood3");
+        var neighbourhood4=document.getElementById("current-neighbourhood4");
+
+        function getLocation()
+        {
+          var mapOptions = {
+            zoom: 15
+          };
+
+          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+          var geocoder = new google.maps.Geocoder();
+          var point;
+
+          if (navigator.geolocation)
+          {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+              map.setCenter(point);
+              latlong.innerHTML="Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+
+              geocoder.geocode({ 'latLng': point}, function (results, status) {
+                if (status !== google.maps.GeocoderStatus.OK) {
+                  alert(status);
+                }
+                // This is checking to see if the Geoeode Status is OK before proceeding
+                if (status == google.maps.GeocoderStatus.OK) {
+                  console.log(results);
+                  var resultAddress = (results[0].formatted_address);
+                  address.innerHTML=resultAddress;
+                  neighbourhood1.innerHTML=results[0].address_components[1].long_name
+                  neighbourhood2.innerHTML=results[0].address_components[2].long_name
+                  neighbourhood3.innerHTML=results[0].address_components[3].long_name
+                  neighbourhood4.innerHTML=results[0].address_components[4].long_name
+                }
+
+              });
+            });
+
+          }
+          else{x.innerHTML="Geolocation is not supported by this browser.";}
+        }
+      </script>
+    </body>
+  </html>
+
