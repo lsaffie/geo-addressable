@@ -4,10 +4,11 @@
   <head>
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
   </head>
-  <body onLoad="getLocation()">
+  <body>
     <div class="container">
 
-      <h2>
+
+      <h3>
       <p>
       <div id="current-position"> </div>
       </p>
@@ -34,11 +35,13 @@
       Address4:
       <span id="current-neighbourhood4"> </span>
       </p>
-    </h2>
+    </h3>
 
       <p>
       <div id="map-canvas"> </div>
       </p>
+      <br>
+      <button class="btn btn-default" onClick="getLocation();">Geolocate me</button>
       </container>
 
 

@@ -1,21 +1,16 @@
 .container.jumbotron
-  %p
-    = notice 
 
   %p
-    = notice 
     %strong
       Address:
     = @address.address
 
   %p
-    = notice 
     %strong
       Latitude:
     =@address.latitude
 
   %p
-    = notice 
     %strong
       Longitude:
     = @address.longitude
@@ -32,6 +27,7 @@
     -@address.nearbys(15, units: :km).each do |near|
       %tr
         %td=link_to near.address, address_path(near)
+        %td="#{@address.distance_to(near, :km).round(1)} km"
 
 = link_to 'Edit', edit_address_path(@address)
 |

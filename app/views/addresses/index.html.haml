@@ -15,5 +15,7 @@
         %tr
           %td
             = link_to address.address, address
+          %td
+            =link_to 'Destroy', @address, method: :delete, data: { confirm: 'Are you sure?' }
 
   = link_to 'New Address', new_address_path
