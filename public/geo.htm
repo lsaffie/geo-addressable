@@ -7,28 +7,34 @@
   <body onLoad="getLocation()">
     <div class="container">
 
+      <h2>
       <p>
       <div id="current-position"> </div>
       </p>
 
       <p>
-      Address: <span id="current-address"> </span>
+      Full address: <span id="current-address"> </span>
       </p>
+      </br>
       <p>
-      Neighbourhood1: <span id="current-neighbourhood1"> </span>
+      Address1: <span id="current-neighbourhood1"> </span>
       </p>
+      </br>
       <p>
-      Neighbourhood2:
+      Address2:
       <span id="current-neighbourhood2"> </span>
       </p>
+      </br>
       <p>
-      Neighbourhood3:
+      Address3:
       <span id="current-neighbourhood3"> </span>
       </p>
+      </br>
       <p>
-      Neighbourhood4:
+      Address4:
       <span id="current-neighbourhood4"> </span>
       </p>
+    </h2>
 
       <p>
       <div id="map-canvas"> </div>
@@ -46,11 +52,7 @@
 
         function getLocation()
         {
-          var mapOptions = {
-            zoom: 15
-          };
 
-          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
           var geocoder = new google.maps.Geocoder();
           var point;
 
@@ -58,23 +60,22 @@
           {
             navigator.geolocation.getCurrentPosition(function(position) {
               point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-              map.setCenter(point);
-              latlong.innerHTML="Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
 
               geocoder.geocode({ 'latLng': point}, function (results, status) {
-                if (status !== google.maps.GeocoderStatus.OK) {
-                  alert(status);
-                }
                 // This is checking to see if the Geoeode Status is OK before proceeding
                 if (status == google.maps.GeocoderStatus.OK) {
                   console.log(results);
+
                   var resultAddress = (results[0].formatted_address);
                   address.innerHTML=resultAddress;
+
                   neighbourhood1.innerHTML=results[0].address_components[1].long_name
                   neighbourhood2.innerHTML=results[0].address_components[2].long_name
                   neighbourhood3.innerHTML=results[0].address_components[3].long_name
                   neighbourhood4.innerHTML=results[0].address_components[4].long_name
-                }
+                } else {
+                alert(status);
+              }
 
               });
             });
