@@ -5,3 +5,11 @@ https://github.com/alexreisner/geocoder
 
 It also has a quick example of using javascript geolocation
 http://localhost/geo.htm
+
+== USAGE
+
+1. Clone the project
+
+2. bundle install
+
+3. http://localhost:3000
